@@ -1,0 +1,27 @@
+{
+  "name": "rx-study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://github/kengo-k/rx-study"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "jest": "^29.6.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1"
+  }
+}

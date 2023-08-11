@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RxJS Exsamples</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.6.3/rxjs.umd.min.js"></script>
+  </head>
+  <body>
+    <button id="myButton">Click Me!</button>
+
+    <script>
+      const { fromEvent, of } = rxjs;
+      const { concatMap, delay } = rxjs.operators;
+
+      const button = document.getElementById("myButton");
+
+      fromEvent(button, "click")
+        .pipe(concatMap(() => of("Hello").pipe(delay(3000))))
+        .subscribe(console.log);
+    </script>
+  </body>
+</html>

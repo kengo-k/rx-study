@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RxJS Button Example</title>
+  </head>
+  <body>
+    <button id="btn1">Button 1</button>
+    <button id="btn2">Button 2</button>
+    <button id="btn3">Button 3</button>
+
+    <script src="https://unpkg.com/rxjs@6.6.7/bundles/rxjs.umd.min.js"></script>
+    <script>
+      const { fromEvent, merge, of } = rxjs;
+      const { map, debounceTime, tap } = rxjs.operators;
+
+      const btn1 = document.getElementById("btn1");
+      const btn2 = document.getElementById("btn2");
+      const btn3 = document.getElementById("btn3");
+
+      const stream1 = fromEvent(btn1, "click").pipe(map(() => 1));
+      const stream2 = fromEvent(btn2, "click").pipe(map(() => 2));
+      const stream3 = fromEvent(btn3, "click").pipe(map(() => 3));
+
+      const mergedStream = merge(stream1, stream2, stream3);
+      let values = [];
+
+      mergedStream
+        .pipe(
+          tap((value) => {
+            values.push(value);
+          }),
+          debounceTime(10000) // Wait for 10 seconds of inactivity
+        )
+        .subscribe(() => {
+          console.log("Collected values:", values);
+          values = []; // Reset collected values
+        });
+    </script>
+  </body>
+</html>
